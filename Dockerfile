@@ -1,4 +1,4 @@
-FROM docker pull centos/mysql-57-centos7
+FROM centos/mysql-57-centos7
 
 MAINTAINER Frank Ore <frank.ore@live.com>
 
