@@ -2,16 +2,16 @@ FROM centos/mysql-57-centos7
 
 MAINTAINER Frank Ore <frank.ore@live.com>
 
+#install required packages
+RUN yum -y update && \
+ yum -y install wget && \
+ yum -y install tar
+
 #Restore database
 RUN /bin/bash -c "/usr/bin/mysqld_safe --skip-grant-tables &" && \
   sleep 5 && \
   mysql -u root -e "CREATE DATABASE portal_dns" && \
   mysql -u root portal_dns < /tmp/dump.sql
-
-#install required packages
-RUN yum -y update && \
- yum -y install wget && \
- yum -y install tar
 
 #set Oracle Java8 variables
 ENV JAVA_VERSION 8u151
