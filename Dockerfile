@@ -3,8 +3,10 @@ FROM centos/mysql-57-centos7
 MAINTAINER Frank Ore <frank.ore@live.com>
 
 #Restore database
-ADD init_db.sh /tmp/init_db.sh
-RUN /tmp/init_db.sh
+RUN /bin/bash -c "/usr/bin/mysqld_safe --skip-grant-tables &" && \
+  sleep 5 && \
+  mysql -u root -e "CREATE DATABASE portal_dns" && \
+  mysql -u root portal_dns < /tmp/dump.sql
 
 #install required packages
 RUN yum -y update && \
